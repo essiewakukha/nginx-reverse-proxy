@@ -1,5 +1,5 @@
-resource "aws_iam_role" "instance" {
-  name = "${var.project_name}-instance-role"
+resource "aws_iam_role" "proxy" {
+  name = "${var.project_name}-proxy-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -13,12 +13,12 @@ resource "aws_iam_role" "instance" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "instance_ssm" {
-  role       = aws_iam_role.instance.name
+resource "aws_iam_role_policy_attachment" "proxy_ssm" {
+  role       = aws_iam_role.proxy.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_instance_profile" "instance" {
-  name = "${var.project_name}-instance-profile"
-  role = aws_iam_role.instance.name
+resource "aws_iam_instance_profile" "proxy" {
+  name = "${var.project_name}-proxy-profile"
+  role = aws_iam_role.proxy.name
 }

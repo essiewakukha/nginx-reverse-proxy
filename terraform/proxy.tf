@@ -6,8 +6,6 @@ resource "aws_instance" "proxy" {
   iam_instance_profile        = aws_iam_instance_profile.proxy.name
   associate_public_ip_address = true
 
-  # Referencing aws_instance.app.private_ip makes Terraform create the app
-  # server first, then render the proxy script with the app's address in it.
   user_data = templatefile("${path.module}/scripts/proxy-user-data.sh", {
     app_private_ip = aws_instance.app.private_ip
     app_port       = var.app_port

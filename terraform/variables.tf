@@ -23,21 +23,25 @@ variable "vpc_cidr" {
 }
 
 variable "public_subnet_cidr" {
-  description = "CIDR block for the public subnet"
+  description = "CIDR block for the public subnet (Nginx proxy)"
   type        = string
   default     = "10.0.1.0/24"
 }
 
-# t2.micro = 1 vCPU, which is what fits a default 1-vCPU account limit.
-# t3.micro (2 vCPU) is what required the quota increase in the two-instance version.
-variable "instance_type" {
-  description = "EC2 instance type"
+variable "private_subnet_cidr" {
+  description = "CIDR block for the private subnet (backend app)"
   type        = string
-  default     = "t2.micro"
+  default     = "10.0.2.0/24"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type for both servers"
+  type        = string
+  default     = "t3.micro"
 }
 
 variable "app_port" {
-  description = "Port the backend app listens on, on localhost only"
+  description = "Port the backend app listens on"
   type        = number
   default     = 5000
 }

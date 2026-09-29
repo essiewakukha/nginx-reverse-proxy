@@ -1,6 +1,4 @@
 #!/bin/bash
-# Bootstrap for the private backend app. Uses only python3, which is
-# preinstalled on Amazon Linux 2023, because this subnet has no internet access.
 set -euxo pipefail
 
 mkdir -p /opt/app
